@@ -77,15 +77,15 @@ class CanvasDrawer {
         const bigSquareSize = 150;
         const middleSquareSize = 100;
         const smallSquareSize = 50;
-        const animationDuration =  5000;
+        const animationDuration =  10000;
 
         for(let x = 0; x < 8; x++) {
             for(let y = 0; y < 8; y++) {
                 const posX = 100 * x + 50;
                 const posY = 100 * y + 50;
 
-                this.objectsToDraw.push(new Rect(posX, posY, 0, 0, bigSquareSize, bigSquareSize, animationDuration));
-                this.objectsToDraw.push(new Rect(posX, posY, 0, 0, middleSquareSize, middleSquareSize, animationDuration));
+                this.objectsToDraw.push(new Rect(posX, posY, middleSquareSize, middleSquareSize, bigSquareSize, bigSquareSize, animationDuration));
+                this.objectsToDraw.push(new Rect(posX, posY, smallSquareSize, smallSquareSize, middleSquareSize, middleSquareSize, animationDuration));
                 this.objectsToDraw.push(new Rect(posX, posY, 0, 0, smallSquareSize, smallSquareSize, animationDuration));
             }
         }
