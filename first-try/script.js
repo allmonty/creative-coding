@@ -17,25 +17,31 @@ class Rect {
 
         this.currentWidth = maxWidth;
         this.currentHeight = maxHeight;
-        this.animationTimeLapsed = Math.random() >= 0.5 ? animDuration/2 : 0;
-        this.animationDuration = Math.random() >= 0.5 ? animDuration/2 : animDuration;;
-        this.animationDirection = 1;
-        this.animationColorDirection = Math.random() >= 0.5 ? 1 : -1;;
+        this.animationTimeLapsed = 0;
+
+        this.animationScaleTimeLapsed = Math.random() >= 0.5 ? animDuration/2 : 0;
+        this.animationDuration = Math.random() >= 0.5 ? animDuration/2 : animDuration;
+
+        this.animationRotationDirection = Math.random() >= 0.5 ? 1 : -1;
+        this.animationScaleDirection = Math.random() >= 0.5 ? 1 : -1;
+        this.animationColorDirection = Math.random() >= 0.5 ? 1 : -1;
     }
 
     tick(context, deltaTime) {
-        this.animationTimeLapsed += deltaTime * this.animationDirection;
-        if (this.animationTimeLapsed > this.animationDuration) {
-            this.animationTimeLapsed = this.animationDuration;
-            this.animationDirection *= -1;
+        this.animationTimeLapsed += deltaTime;
+
+        this.animationScaleTimeLapsed += deltaTime * this.animationScaleDirection;
+        if (this.animationScaleTimeLapsed > this.animationDuration) {
+            this.animationScaleTimeLapsed = this.animationDuration;
+            this.animationScaleDirection *= -1;
         }
-        if (this.animationTimeLapsed < 0) {
-            this.animationTimeLapsed = 0;
-            this.animationDirection *= -1;
+        if (this.animationScaleTimeLapsed < 0) {
+            this.animationScaleTimeLapsed = 0;
+            this.animationScaleDirection *= -1;
         }
 
-        this.currentWidth = EasingFunction.easeOutQuad(this.animationTimeLapsed, this.minWidth, this.maxWidth, this.animationDuration);
-        this.currentHeight = EasingFunction.easeOutQuad(this.animationTimeLapsed, this.minHeight, this.maxHeight, this.animationDuration);
+        this.currentWidth = EasingFunction.easeOutQuad(this.animationScaleTimeLapsed, this.minWidth, this.maxWidth, this.animationDuration);
+        this.currentHeight = EasingFunction.easeOutQuad(this.animationScaleTimeLapsed, this.minHeight, this.maxHeight, this.animationDuration);
 
         this.draw(context);
     }
@@ -56,8 +62,8 @@ class Rect {
         grd.addColorStop(1, "#faea48");
         context.strokeStyle = grd;
 
-        context.lineWidth = 20
-        context.rotate(this.animationTimeLapsed * 0.001);
+        context.lineWidth = 27
+        context.rotate(this.animationTimeLapsed * 0.001 * -this.animationRotationDirection);
 
         context.rect(offsetX, offsetY, this.currentWidth, this.currentHeight);
 
