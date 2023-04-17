@@ -1,4 +1,4 @@
-export default class Animator {
+class Animator {
     constructor(window){
         this.window = window;
         this.lastTime = null;
@@ -23,3 +23,11 @@ export default class Animator {
         this.window.requestAnimationFrame(this.doAnimate.bind(this))
     }
 }
+
+class EasingFunction {
+    static easeOutQuad (time, startValue, endValue, duration) {
+        return -endValue * (time /= duration) * (time - 2) + startValue;
+    }
+}
+
+export {Animator, EasingFunction}
