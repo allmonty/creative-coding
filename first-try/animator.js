@@ -6,13 +6,16 @@ export default class Animator {
     }
 
     doAnimate(time) {
-        if (this.lastTime) {
-            const delta = time - this.lastTime;
-            
-            this.targetFun(delta);
+        let delta = 0
+        if (this.lastTime != null && document.hidden === false) {
+            delta = time - this.lastTime;
         }
+        
         this.lastTime = time;
         this.window.requestAnimationFrame(this.doAnimate.bind(this))
+
+        // console.log("Animator -> ", "Time:", time, "LastTime:", this.lastTime, "Delta:", delta)
+        this.targetFun(delta);
     }
 
     animate(fun) {

@@ -47,7 +47,6 @@ class CanvasDrawer {
         const squareMinSize = 75;
         const squareMaxSize = 100;
         const percent = this.currentAnimationPercentage;
-        console.log(percent);
 
         for(let x = 0; x < 5; x++) {
             for(let y = 0; y < 5; y++) {
@@ -70,7 +69,12 @@ class CanvasDrawer {
         }
     
         this.currentAnimationPercentage += (delta / duration) * this.direction;
-        if (this.currentAnimationPercentage < 0 || this.currentAnimationPercentage > 1) {
+        if (this.currentAnimationPercentage < 0) {
+            this.currentAnimationPercentage = 0;
+            this.direction *= -1;
+        }
+        if (this.currentAnimationPercentage > 1) {
+            this.currentAnimationPercentage = 1;
             this.direction *= -1;
         }
     }
