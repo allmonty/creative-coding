@@ -20,6 +20,7 @@ class Rect {
         this.animationTimeLapsed = Math.random() >= 0.5 ? animDuration/2 : 0;
         this.animationDuration = Math.random() >= 0.5 ? animDuration/2 : animDuration;;
         this.animationDirection = 1;
+        this.animationColorDirection = Math.random() >= 0.5 ? 1 : -1;;
     }
 
     tick(context, deltaTime) {
@@ -48,19 +49,19 @@ class Rect {
         const offsetY = -this.currentHeight * 0.5;
 
         var grd = context.createLinearGradient(offsetX, offsetY, this.currentWidth + offsetX, this.currentHeight + offsetY);
-        grd.addColorStop(0, 'black');
+        grd.addColorStop(0, "#000000");
         grd.addColorStop(0.25, "#3330e4");
         grd.addColorStop(0.5, "#f637ec");
         grd.addColorStop(0.75, "#fbb454");
         grd.addColorStop(1, "#faea48");
         context.strokeStyle = grd;
 
-        context.lineWidth = 7
+        context.lineWidth = 20
         context.rotate(this.animationTimeLapsed * 0.001);
 
         context.rect(offsetX, offsetY, this.currentWidth, this.currentHeight);
 
-        context.rotate((this.animationTimeLapsed * 0.3 * Math.PI) / 180);
+        context.rotate(this.animationTimeLapsed * 0.002 * this.animationColorDirection);
 
         context.stroke();
         context.restore();
@@ -73,8 +74,8 @@ class CanvasDrawer {
         this.direction = 1;
         this.objectsToDraw = [];
 
-        const bigSquareSize = 100;
-        const middleSquareSize = 75;
+        const bigSquareSize = 150;
+        const middleSquareSize = 100;
         const smallSquareSize = 50;
         const animationDuration =  5000;
 
@@ -91,7 +92,7 @@ class CanvasDrawer {
     }
 
     draw(deltaTime) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         this.objectsToDraw.forEach((object) => object.tick(ctx, deltaTime));
     }
