@@ -1,6 +1,6 @@
 /** @type {HTMLCanvasElement} */
 
-import {Animator, EasingFunction} from "./animator.js";
+import {Animator, EasingFunction} from "../_utils/animator.js";
 
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
@@ -46,6 +46,7 @@ class Rect {
         this.draw(context);
     }
 
+    /**@param {CanvasRenderingContext2D} context */ 
     draw(context) {
         context.save();
         context.beginPath();
@@ -97,13 +98,14 @@ class CanvasDrawer {
         }
     }
 
-    draw(deltaTime) {
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    /**@param {CanvasRenderingContext2D} context */ 
+    draw(context, deltaTime) {
+        context.fillRect(0, 0, canvas.width, canvas.height);
 
-        this.objectsToDraw.forEach((object) => object.tick(ctx, deltaTime));
+        this.objectsToDraw.forEach((object) => object.tick(context, deltaTime));
     }
 }
 
-const animator = new Animator(window);
+const animator = new Animator(window, ctx);
 const canvasDrawer = new CanvasDrawer();
 animator.animate((deltaTime) => canvasDrawer.draw(deltaTime))

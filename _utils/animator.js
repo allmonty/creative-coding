@@ -1,6 +1,7 @@
 class Animator {
-    constructor(window){
+    constructor(window, context){
         this.window = window;
+        this.context = context;
         this.lastTime = null;
         this.targetFun = null;
     }
@@ -15,7 +16,7 @@ class Animator {
         this.window.requestAnimationFrame(this.doAnimate.bind(this))
 
         // console.log("Animator -> ", "Time:", time, "LastTime:", this.lastTime, "Delta:", delta)
-        this.targetFun(delta);
+        this.targetFun(this.context, delta);
     }
 
     animate(fun) {
