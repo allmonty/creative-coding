@@ -1,6 +1,6 @@
 /** @type {HTMLCanvasElement} */
 
-import {Animator, EasingFunction} from "../_utils/animator.js";
+import {Animator, EasingFunction} from "../utils/animator.js";
 
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
@@ -54,7 +54,6 @@ class Rect {
 
         const offsetX = -this.currentWidth * 0.5;
         const offsetY = -this.currentHeight * 0.5;
-
         var grd = context.createLinearGradient(offsetX, offsetY, this.currentWidth + offsetX, this.currentHeight + offsetY);
         grd.addColorStop(0, "#000000");
         grd.addColorStop(0.25, "#3330e4");
@@ -108,4 +107,4 @@ class CanvasDrawer {
 
 const animator = new Animator(window, ctx);
 const canvasDrawer = new CanvasDrawer();
-animator.animate((deltaTime) => canvasDrawer.draw(deltaTime))
+animator.animate((context, deltaTime) => canvasDrawer.draw(context, deltaTime))
