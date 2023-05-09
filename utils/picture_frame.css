@@ -34,10 +34,10 @@
         
         position: absolute;
         content: "";
-        bottom: -2vmin;
-        left: -2vmin;
-        right: -2vmin;
-        top: -2vmin;
+        bottom: -0.5vmin;
+        left: -0.5vmin;
+        right: -0.5vmin;
+        top: -0.5vmin;
     }
 
     &:after {
@@ -46,9 +46,9 @@
 
         position: absolute;
         content: "";
-        bottom: -2.5vmin;
-        left: -2.5vmin;
-        right: -2.5vmin;
-        top: -2.5vmin;
+        bottom: -1vmin;
+        left: -1vmin;
+        right: -1vmin;
+        top: -1vmin;
     }
 }
